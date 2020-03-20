@@ -1,0 +1,17 @@
+O GATO
+1.  Introducao
+Era uma vez um gato maltes...
+1.1.  Seccao1
+Tocava piano e falava frances
+1.2.  Seccao2
+...e dava uns toques de guitarra e falava ingles tambem
+2.  Desenvolvimento
+Na verdade, o gato apenas:
+. Miava
+. Ronronava
+. Fugia dos caes
+3.  Conclusoes
+Moral da historia:
+1- Os animais sao nossos amigos
+2- Mesmo quando nao falam frances nem ingles
+3- Mesmo quando nao tocam piano nem guitarra
