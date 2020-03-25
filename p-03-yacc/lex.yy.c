@@ -362,16 +362,16 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[10] =
     {   0,
-        0,    0,    6,    4,    3,    2,    1,    1,    0
+        0,    0,    6,    4,    3,    1,    2,    2,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    4,    4,    4,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
+        3,    3,    3,    1,    3,    1,    3,    4,    4,    4,
         4,    4,    4,    4,    4,    4,    4,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -438,9 +438,9 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "mycalc.l"
-#line 2 "mycalc.l"
-#include "y.tab.h"
+#line 1 "lisp.l"
+#line 2 "lisp.l"
+    #include "y.tab.h"
 #line 445 "lex.yy.c"
 #line 446 "lex.yy.c"
 
@@ -659,9 +659,10 @@ YY_DECL
 		}
 
 	{
-#line 5 "mycalc.l"
+#line 7 "lisp.l"
 
-#line 665 "lex.yy.c"
+
+#line 666 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -720,35 +721,31 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 6 "mycalc.l"
-{yylval = atoi(yytext); /* Guarda valor em yylval e*/
-             return NUMBER;}        /* envia token reconhecido ao YACC*/
+#line 9 "lisp.l"
+{return *yytext;}
 	YY_BREAK
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 9 "mycalc.l"
-{return 0;}             /* Fim = sinal de EOF para YACC */
+#line 10 "lisp.l"
+{yylval=atoi(yytext); return NUMBER;}
 	YY_BREAK
 case 3:
+/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 10 "mycalc.l"
-;                       /* Ignorar espaço e tab*/
+#line 11 "lisp.l"
+return 0;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 12 "mycalc.l"
-return yytext[0];       /* Caso seja qualquer outro */
+#line 12 "lisp.l"
+;
 	YY_BREAK
-/* caracter (por exemplo um */
-/* operador), enviar para   */
-/* o YACC*/
 case 5:
 YY_RULE_SETUP
-#line 16 "mycalc.l"
+#line 13 "lisp.l"
 ECHO;
 	YY_BREAK
-#line 752 "lex.yy.c"
+#line 749 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1753,15 +1750,9 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 16 "mycalc.l"
+#line 13 "lisp.l"
 
 
 int yywrap() {
     return 1;
 }
-
-void yyerror (const char *s) { 
-     printf ("%s: %s\n", s, yytext);
-}
-
-

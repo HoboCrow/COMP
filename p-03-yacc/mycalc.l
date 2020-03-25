@@ -1,5 +1,5 @@
 %{
-#include "y.tab.h"
+    #include "y.tab.h"
 %}
 
 %%
@@ -17,9 +17,5 @@
 
 int yywrap() {
     return 1;
-}
-
-void yyerror (const char *s) { 
-     printf ("%s: %s\n", s, yytext);
 }
 

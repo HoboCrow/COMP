@@ -5,7 +5,7 @@
 %}
 
 %token NUMBER
-%left '+' '-'
+%left '-' '+'
 %left '*' '/'
 %right '='
 
@@ -16,8 +16,8 @@ calc: expression                        {printf("%d\n", $1);}
 expression: expression '+' expression   {$$=$1+$3;}
     |   expression '-' expression       {$$=$1-$3;}
     |   expression '*' expression       {$$=$1*$3;}
-    |   expression '/' expression       {if ($3 == 0) yyerror("Divide by zero!\n"); $$=$1/$3;}
-    |   '-' expression                  {$$ *= -1;}
+    |   expression '/' expression       {if ($3 == 0) { yyerror("Divide by zero!"); return 0;} $$=$1/$3;}
+    |   '-' expression                  {$$ = $2*-1;}
     |   '(' expression ')'              {$$ = $2;}
     |   NUMBER                          {$$=$1;}
     ;
@@ -28,3 +28,6 @@ int main() {
     return 0;
 }
 
+void yyerror (const char *s) { 
+    printf ("%s\n", s);
+}
