@@ -6,8 +6,9 @@ numbers     [0-9]+
 
 %%
 
-[-+()/*]    {return *yytext;}
-{numbers}   {yylval=atoi(yytext); return NUMBER;}
+[-+()/*]                {return *yytext;}
+{numbers}               {yylval.ival=atoi(yytext); return NUMBER;}
+{numbers}\.{numbers}    {yylval.dval=atof(yytext); return REAL;}
 \n          return 0;
 .           ;
 %%
