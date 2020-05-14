@@ -25,23 +25,14 @@ write       {ncol+=yyleng; return WRITE;    }
 .           {ncol+=yyleng; return yytext[0];}
 %%
 
-extern program_node* pn;
-
 int main(int argc, char **argv) {
     int errors;
 
     yyparse();
-    int i = 0;
-    for (program_node* tmp = pn; tmp; tmp = tmp->next, i++){
-        printf("Program %d:\n",i);
-        is_program *myprogram = tmp->prog;
-        symtab = myprogram->symtab;
-        errors=check_program(myprogram);
-        if(errors>0)
-            printf("The program has %d errors!\n", errors);
-        show_table();
-        printf("\n");
-    }
+    errors=check_program(myprogram);
+    if(errors>0)
+        printf("The program has %d errors!\n", errors);
+    show_table();
     yylex_destroy();
     return 0;
 }

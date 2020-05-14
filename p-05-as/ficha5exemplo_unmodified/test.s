@@ -1,5 +1,5 @@
 let 
-	integer	n
+	integer 	n
 	double 	x
 	char 	z
 in

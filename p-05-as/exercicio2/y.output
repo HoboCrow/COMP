@@ -1,0 +1,241 @@
+Grammar
+
+    0 $accept: program $end
+
+    1 program: program LET vardeclist IN statementlist END
+    2        | LET vardeclist IN statementlist END
+
+    3 vardeclist: %empty
+    4           | vardeclist vardec
+
+    5 vardec: INTEGER IDENTIFIER
+    6       | CHARACTER IDENTIFIER
+    7       | DOUBLE IDENTIFIER
+
+    8 statementlist: %empty
+    9              | statementlist statement
+
+   10 statement: WRITE IDENTIFIER
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+INTEGER (258) 5
+DOUBLE (259) 7
+CHARACTER (260) 6
+LET (261) 1 2
+IN (262) 1 2
+END (263) 1 2
+WRITE (264) 10
+IDENTIFIER (265) 5 6 7 10
+
+
+Nonterminals, with rules where they appear
+
+$accept (11)
+    on left: 0
+program (12)
+    on left: 1 2, on right: 0 1
+vardeclist (13)
+    on left: 3 4, on right: 1 2 4
+vardec (14)
+    on left: 5 6 7, on right: 4
+statementlist (15)
+    on left: 8 9, on right: 1 2 9
+statement (16)
+    on left: 10, on right: 9
+
+
+State 0
+
+    0 $accept: . program $end
+
+    LET  shift, and go to state 1
+
+    program  go to state 2
+
+
+State 1
+
+    2 program: LET . vardeclist IN statementlist END
+
+    $default  reduce using rule 3 (vardeclist)
+
+    vardeclist  go to state 3
+
+
+State 2
+
+    0 $accept: program . $end
+    1 program: program . LET vardeclist IN statementlist END
+
+    $end  shift, and go to state 4
+    LET   shift, and go to state 5
+
+
+State 3
+
+    2 program: LET vardeclist . IN statementlist END
+    4 vardeclist: vardeclist . vardec
+
+    INTEGER    shift, and go to state 6
+    DOUBLE     shift, and go to state 7
+    CHARACTER  shift, and go to state 8
+    IN         shift, and go to state 9
+
+    vardec  go to state 10
+
+
+State 4
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 5
+
+    1 program: program LET . vardeclist IN statementlist END
+
+    $default  reduce using rule 3 (vardeclist)
+
+    vardeclist  go to state 11
+
+
+State 6
+
+    5 vardec: INTEGER . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 12
+
+
+State 7
+
+    7 vardec: DOUBLE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 13
+
+
+State 8
+
+    6 vardec: CHARACTER . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 14
+
+
+State 9
+
+    2 program: LET vardeclist IN . statementlist END
+
+    $default  reduce using rule 8 (statementlist)
+
+    statementlist  go to state 15
+
+
+State 10
+
+    4 vardeclist: vardeclist vardec .
+
+    $default  reduce using rule 4 (vardeclist)
+
+
+State 11
+
+    1 program: program LET vardeclist . IN statementlist END
+    4 vardeclist: vardeclist . vardec
+
+    INTEGER    shift, and go to state 6
+    DOUBLE     shift, and go to state 7
+    CHARACTER  shift, and go to state 8
+    IN         shift, and go to state 16
+
+    vardec  go to state 10
+
+
+State 12
+
+    5 vardec: INTEGER IDENTIFIER .
+
+    $default  reduce using rule 5 (vardec)
+
+
+State 13
+
+    7 vardec: DOUBLE IDENTIFIER .
+
+    $default  reduce using rule 7 (vardec)
+
+
+State 14
+
+    6 vardec: CHARACTER IDENTIFIER .
+
+    $default  reduce using rule 6 (vardec)
+
+
+State 15
+
+    2 program: LET vardeclist IN statementlist . END
+    9 statementlist: statementlist . statement
+
+    END    shift, and go to state 17
+    WRITE  shift, and go to state 18
+
+    statement  go to state 19
+
+
+State 16
+
+    1 program: program LET vardeclist IN . statementlist END
+
+    $default  reduce using rule 8 (statementlist)
+
+    statementlist  go to state 20
+
+
+State 17
+
+    2 program: LET vardeclist IN statementlist END .
+
+    $default  reduce using rule 2 (program)
+
+
+State 18
+
+   10 statement: WRITE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 21
+
+
+State 19
+
+    9 statementlist: statementlist statement .
+
+    $default  reduce using rule 9 (statementlist)
+
+
+State 20
+
+    1 program: program LET vardeclist IN statementlist . END
+    9 statementlist: statementlist . statement
+
+    END    shift, and go to state 22
+    WRITE  shift, and go to state 18
+
+    statement  go to state 19
+
+
+State 21
+
+   10 statement: WRITE IDENTIFIER .
+
+    $default  reduce using rule 10 (statement)
+
+
+State 22
+
+    1 program: program LET vardeclist IN statementlist END .
+
+    $default  reduce using rule 1 (program)

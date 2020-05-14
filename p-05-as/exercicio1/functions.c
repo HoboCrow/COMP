@@ -6,26 +6,6 @@
 
 #include "structures.h"
 
-program_node* push_program(program_node* head, is_program* prog) {
-    program_node* pn = malloc(sizeof *pn);
-    if (!pn) {
-        printf("Malloc error\n");
-        exit(1);
-    }
-    pn->next = NULL;
-    pn->prog = prog;
-
-    if (!head) {
-        return pn;
-    }
-    program_node* tmp = head;
-    for (; tmp->next; tmp = tmp->next)
-        ;
-    tmp->next = pn;
-
-    return head;
-}
-
 is_program* insert_program(is_vardec_list* ivl, is_statement_list* isl) {
     is_program* ip = (is_program*)malloc(sizeof(is_program));
 

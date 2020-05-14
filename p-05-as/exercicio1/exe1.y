@@ -9,16 +9,14 @@ int yylex (void);
 void yyerror(char* s);
 
 is_program* myprogram;
-program_node * pn;
 extern int ncol;
 extern int yylineno;
 extern int yyleng;
-extern table_element *symtab;
 %}
 
 %token INTEGER DOUBLE CHARACTER LET IN END WRITE
 %token<id>IDENTIFIER
-%type<pn>program
+%type<ip>program
 %type<ivl>vardeclist
 %type<iv>vardec
 %type<isl>statementlist
@@ -26,7 +24,6 @@ extern table_element *symtab;
 
 %union{
     char *id;
-    program_node* pn;
     is_program* ip;
     is_vardec_list* ivl;
     is_vardec* iv;
@@ -34,13 +31,12 @@ extern table_element *symtab;
     is_statement* is;
 }
 %%
-
-program: program LET vardeclist IN statementlist END {$$ = pn = push_program($1,insert_program($3,$5));}
-    | LET vardeclist IN statementlist END { $$=push_program(NULL,insert_program($2, $4)); }
+program: LET vardeclist IN statementlist END
+                                        {$$=myprogram=insert_program($2, $4);} 
     ;
 
 vardeclist: /*empty*/                   {$$=NULL;}
-    | vardeclist vardec                 {$$=insert_vardec_list($1,$2);}
+    | vardeclist vardec             {$$=insert_vardec_list($1,$2);}
     ;
 
 vardec: INTEGER IDENTIFIER              {$$=insert_integer_dec($2,yylineno,ncol-yyleng);}
