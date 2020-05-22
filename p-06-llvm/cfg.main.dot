@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x7fffc4e31020 [shape=record,label="{entry:\l  %v1 = add i32 0, 3\l  %v2 = add i32 0, 2\l  %ifcond = icmp eq i32 %v1, %v2\l  br i1 %ifcond, label %then, label %else\l|{<s0>T|<s1>F}}"];
+	Node0x7fffc4e31020:s0 -> Node0x7fffc4e31a20;
+	Node0x7fffc4e31020:s1 -> Node0x7fffc4e31a90;
+	Node0x7fffc4e31a20 [shape=record,label="{then:                                             \l  %calltmp = add i32 %v1, %v2\l  br label %ifcont\l}"];
+	Node0x7fffc4e31a20 -> Node0x7fffc4e31c80;
+	Node0x7fffc4e31a90 [shape=record,label="{else:                                             \l  %calltmp1 = mul i32 %v1, %v2\l  br label %ifcont\l}"];
+	Node0x7fffc4e31a90 -> Node0x7fffc4e31c80;
+	Node0x7fffc4e31c80 [shape=record,label="{ifcont:                                           \l  %iftmp = phi i32 [ %calltmp, %then ], [ %calltmp1, %else ]\l  ret i32 %iftmp\l}"];
+}
